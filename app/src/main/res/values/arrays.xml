@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--Array for sort setting options-->
+    <string-array name="pref_sort_options">
+        <item>@string/pref_sortBY_label_popularity</item>
+        <item>@string/pref_sortBy_label_highestRated</item>
+
+    </string-array>
+    <!--Array for sort setting values-->
+    <string-array name="pref_sort_values">
+        <item>@string/pref_sortBY_popularity</item>
+        <item>@string/pref_sortBy_highestRated</item>
+    </string-array>
+
+</resources>
