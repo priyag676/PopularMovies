@@ -10,13 +10,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/detail_fragment">
+        android:background="@color/detail_fragment"
+        android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/detail_movie_listView"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/cards"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/detail_movie_listView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+        </LinearLayout>
 
         <android.support.v7.widget.CardView
             android:id="@+id/detail_trailers_cardview"
@@ -28,34 +35,27 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/cards"
                 android:orientation="vertical"
-                android:padding="10dp"
-                android:background="@color/cards">
+                android:padding="2dp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="@string/trailers"
                     android:textSize="@dimen/detail_header"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:textStyle="bold" />
 
-                <HorizontalScrollView
+
+                <com.example.priya.mymoviesapp.CustomView.ExpandedListView
+                    android:id="@+id/trailers_listview"
+                    android:background="@color/cards"
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:layout_marginTop="20dp">
+                    android:layout_height="wrap_content"
+                    android:divider="@android:color/black" />
 
-                    <com.linearlistview.LinearListView
-                        android:id="@+id/trailers_listview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:divider="?android:dividerHorizontal"
-                        android:orientation="horizontal"
-                        android:showDividers="middle"
-                        android:background="@color/cards"
-                        />
-                </HorizontalScrollView>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -63,36 +63,33 @@
             android:id="@+id/detail_reviews_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:background="@color/detail_fragment"
             android:visibility="visible">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/cards"
                 android:orientation="vertical"
-                android:padding="10dp"
-                android:background="@color/cards">
+                android:padding="2dp">
 
                 <TextView
                     android:id="@+id/review"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="@string/review"
                     android:textSize="@dimen/detail_header"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:textStyle="bold" />
 
-                <com.linearlistview.LinearListView
+                <com.example.priya.mymoviesapp.CustomView.ExpandedListView
                     android:id="@+id/review_listView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:divider="?android:dividerHorizontal"
-                    android:orientation="vertical"
-                    android:showDividers="middle"
-                    android:background="@color/cards"/>
+                    android:divider="@android:color/black"
+                    android:background="@color/cards" />
+
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
-
 </ScrollView>

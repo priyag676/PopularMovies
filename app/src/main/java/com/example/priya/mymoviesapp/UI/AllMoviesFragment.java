@@ -101,7 +101,7 @@ public class AllMoviesFragment extends Fragment implements LoaderManager.LoaderC
 
                     detailIntent.setData(movieUri);
                     detailIntent.putExtra("Id",MOVIE_ID_COL);
-                   detailIntent.putExtra("movieid", mmId);
+                    detailIntent.putExtra("movieid", mmId);
                     //Start details activity
                     startActivity(detailIntent);
                 }

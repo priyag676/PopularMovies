@@ -30,8 +30,6 @@ public class Utility {
                 context.getString(R.string.pref_default_sort_order));
         return sortOrder;
     }
-
-
     /**
      * Returns true if the network is available or about to become available.
      *

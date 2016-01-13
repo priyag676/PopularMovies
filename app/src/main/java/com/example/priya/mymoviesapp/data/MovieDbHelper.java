@@ -41,18 +41,20 @@ public class MovieDbHelper extends SQLiteOpenHelper {
                 + ReviewEntry.COLUMN_AUTHOR + " TEXT NOT NULL, "
                 + ReviewEntry.COLUMN_CONTENT + " TEXT NOT NULL, "
                 + ReviewEntry.COLUMN_REVIEW_ID + " TEXT NOT NULL, "
-                + ReviewEntry.COLUMN_MOVIE_ID + " TEXT NOT NULL "
+                + ReviewEntry.COLUMN_MOVIE_ID + " TEXT NOT NULL, "
               /*+ " FOREIGN KEY (" + ReviewEntry.COLUMN_MOVIE_ID + ") REFERENCES "
                 + MoviesEntry.TABLE_NAME + " (" + MoviesEntry._ID + ")"*/
+                + "UNIQUE (" + ReviewEntry.COLUMN_REVIEW_ID + ") ON CONFLICT REPLACE"
                 + ");";
         final String SQL_CREATE_TRAILER_TABLE = "CREATE TABLE " + TrailerEntry.TABLE_NAME + " ( "
                 + TrailerEntry._ID + " INTEGER PRIMARY KEY, "
                 + TrailerEntry.COLUMN_TITLE + " TEXT NOT NULL, "
                 + TrailerEntry.COLUMN_YOUTUBE_KEY + " TEXT NOT NULL, "
                 + TrailerEntry.COLUMN_MOVIE_ID + " TEXT NOT NULL, "
-                + TrailerEntry.COLUMN_TRAILER_ID + " TEXT NOT NULL "
+                + TrailerEntry.COLUMN_TRAILER_ID + " TEXT NOT NULL, "
                 /*+ " FOREIGN KEY (" + MovieContract.TrailerEntry.COLUMN_MOVIE_ID + ") REFERENCES "
                 + MoviesEntry.TABLE_NAME + " (" + MoviesEntry.COLUMN_MOVIE_ID + ")"*/
+                + "UNIQUE (" + TrailerEntry.COLUMN_TRAILER_ID + ") ON CONFLICT REPLACE"
                 + ");";
 
 

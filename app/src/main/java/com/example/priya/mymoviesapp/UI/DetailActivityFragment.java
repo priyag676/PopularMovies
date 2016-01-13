@@ -7,18 +7,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.priya.mymoviesapp.CustomView.ExpandedListView;
 import com.example.priya.mymoviesapp.R;
 import com.example.priya.mymoviesapp.adapter.DetailAdapter;
 import com.example.priya.mymoviesapp.adapter.ReviewAdapter;
@@ -26,26 +24,22 @@ import com.example.priya.mymoviesapp.adapter.TrailerAdapter;
 import com.example.priya.mymoviesapp.data.MovieContract;
 import com.example.priya.mymoviesapp.tasks.FetchReviewTask;
 import com.example.priya.mymoviesapp.tasks.FetchTrailerTask;
-import com.linearlistview.LinearListView;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class DetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    /*    String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
-        public static final String IMAGE_DEFAULT_SIZE = "w185";*/
     private static final String LOG_TAG = DetailActivityFragment.class.getSimpleName();
-    private static final String SHARE_HASHTAG = " #PopularMoviesApp";
+    /*private static final String SHARE_HASHTAG = " #PopularMoviesApp";
     private ShareActionProvider mShareActionProvider;
-
-    String mMovieStr;
+    String mMovieStr;*/
     private static final int DETAIL_LOADER = 0;
     private static final int REVIEW_LOADER = 1;
     private static final int TRAILER_LOADER = 2;
     private ListView mDetailLayout;
-    private LinearListView mReviewList;
-    private LinearListView mTrailerList;
+    private ExpandedListView mReviewList;
+    private ExpandedListView mTrailerList;
     private DetailAdapter mDetailAdapter;
     private ReviewAdapter mReviewAdapter;
     private TrailerAdapter mTrailerAdapter;
@@ -81,8 +75,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mtrailerCard = (CardView) rootView.findViewById(R.id.detail_trailers_cardview);
 
         mDetailLayout = (ListView) rootView.findViewById(R.id.detail_movie_listView);
-        mReviewList = (LinearListView) rootView.findViewById(R.id.review_listView);
-        mTrailerList = (LinearListView) rootView.findViewById(R.id.trailers_listview);
+        mReviewList = (ExpandedListView) rootView.findViewById(R.id.review_listView);
+        mTrailerList = (ExpandedListView) rootView.findViewById(R.id.trailers_listview);
 
         mDetailAdapter = new DetailAdapter(getActivity(), null, 0);
         mReviewAdapter = new ReviewAdapter(getActivity(), null, 1);
@@ -100,7 +94,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.detailfragment, menu);
 
-        // Retrieve the share menu item
+    /*    // Retrieve the share menu item
         MenuItem menuItem = menu.findItem(R.id.action_share);
 
         // Get the provider and hold onto it to set/change the share intent.
@@ -111,11 +105,12 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         // like when the user selects a new piece of data they might like to share.
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(createShareForecastIntent());
-        }
+        }*/
     }
 
 
-    private Intent createShareForecastIntent() {
+ /*   private Intent createShareForecastIntent() {
+
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
@@ -123,7 +118,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 mMovieStr + "  " + SHARE_HASHTAG);
         return shareIntent;
     }
-
+*/
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         getLoaderManager().initLoader(DETAIL_LOADER, null, this);
@@ -170,34 +165,29 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-//        mMovieId = cursor.getString(cursor.getColumnIndex(MovieContract.MoviesEntry.COLUMN_MOVIE_ID));
         Log.v(LOG_TAG, "In on Load Finish :" + mMovieId);
-
-
         switch (loader.getId()) {
             case DETAIL_LOADER:
                 mDetailAdapter.swapCursor(cursor);
+                Log.v(LOG_TAG, "In on Load Finish :" + loader.getId());
+                break;
+            case TRAILER_LOADER:
+                mTrailerAdapter.swapCursor(cursor);
                 Log.v(LOG_TAG, "In on Load Finish :" + loader.getId());
                 break;
             case REVIEW_LOADER:
                 mReviewAdapter.swapCursor(cursor);
                 Log.v(LOG_TAG, "In on Load Finish :" + loader.getId());
                 break;
-            case TRAILER_LOADER:
-                mTrailerAdapter.swapCursor(cursor);
-                Log.v(LOG_TAG, "In on Load Finish :" + loader.getId());
-                int youtubeKeyColumn = cursor.getColumnIndex(MovieContract.TrailerEntry.COLUMN_YOUTUBE_KEY);
-                String youtubeKey = cursor.getString(youtubeKeyColumn);
-                mMovieStr = "https://www.youtube.com/watch?v=" + youtubeKey;
-                break;
+
             default:
                 throw new UnsupportedOperationException("Unknown loader id: " + loader.getId());
         }
 
-        if (mShareActionProvider != null) {
+       /* if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(createShareForecastIntent());
 
-        }
+        }*/
     }
 
     @Override
@@ -221,4 +211,3 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
 }
-

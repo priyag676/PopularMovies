@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +25,8 @@ import com.squareup.picasso.Picasso;
 
 public class TrailerAdapter extends CursorAdapter {
     String youtubeKey;
+    private static final String LOG_TAG = TrailerAdapter.class.getSimpleName();
+
     public TrailerAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }
@@ -48,23 +52,34 @@ public class TrailerAdapter extends CursorAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   int youtubeKeyColumn = cursor.getColumnIndex(MovieContract.TrailerEntry.COLUMN_YOUTUBE_KEY);
-                String youtubeKey = cursor.getString(youtubeKeyColumn);*/
+                int youtubeKeyColumn = cursor.getColumnIndex(MovieContract.TrailerEntry.COLUMN_YOUTUBE_KEY);
+                String youtubeKey = cursor.getString(youtubeKeyColumn);
                 Uri videoUri = Uri.parse("https://www.youtube.com/watch?v=" + youtubeKey);
-
+                Log.v(LOG_TAG, "Vedio Uri :" + videoUri);
                 Intent playTrailer = new Intent(Intent.ACTION_VIEW, videoUri);
                 context.startActivity(playTrailer);
             }
         });
 
-    }
-    public  String getYoutubeKey()
-    {
-        return youtubeKey;
+        Button ShareButton = (Button) view.findViewById(R.id.shareTrailer);
+        ShareButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                int youtubeKeyColumn = cursor.getColumnIndex(MovieContract.TrailerEntry.COLUMN_YOUTUBE_KEY);
+                String youtubeKey = cursor.getString(youtubeKeyColumn);
+                String videoUri = "https://www.youtube.com/watch?v=" + youtubeKey;
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT,
+                        videoUri);
+                context.startActivity(shareIntent);
+            }
+        });
+
     }
 }
-
-
 /*
 public class TrailerAdapter extends ArrayAdapter<Trailer> {
 
