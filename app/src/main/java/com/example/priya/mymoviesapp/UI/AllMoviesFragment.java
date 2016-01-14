@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.priya.mymoviesapp.R;
@@ -38,7 +39,7 @@ public class AllMoviesFragment extends Fragment implements LoaderManager.LoaderC
     private static final String LOG_TAG = AllMoviesFragment.class.getSimpleName();
     private GridView mGridView;
     private MoviesAdapter mMoviesAdapter;
-   /// private ProgressBar mProgressBar;
+    private ProgressBar mProgressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,11 +60,11 @@ public class AllMoviesFragment extends Fragment implements LoaderManager.LoaderC
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+       /* int id = item.getItemId();
         if (id == R.id.action_refresh) {
             //      mGridAdapter.clear();
             updateData();
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 
@@ -74,7 +75,7 @@ public class AllMoviesFragment extends Fragment implements LoaderManager.LoaderC
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mGridView = (GridView) rootView.findViewById(R.id.gridView);
-      //   mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+        mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
 
         //Initialize with empty data
         // mGridData = new ArrayList<>();
@@ -107,10 +108,7 @@ public class AllMoviesFragment extends Fragment implements LoaderManager.LoaderC
                 }
             }
         });
-
-
-
-        //mProgressBar.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.VISIBLE);
         return rootView;
     }
     public void onResume() {
@@ -138,11 +136,6 @@ public class AllMoviesFragment extends Fragment implements LoaderManager.LoaderC
 
 
     private void updateData() {
-       /* FetchMovieTask movieTask = new FetchMovieTask(getActivity());
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String sort_by = prefs.getString(getString(R.string.pref_sort_order_key),
-                getString(R.string.pref_default_sort_order));
-        movieTask.execute(sort_by);*/
         MovieSyncAdapter.syncImmediately(getActivity());
 
     }
@@ -172,7 +165,7 @@ public class AllMoviesFragment extends Fragment implements LoaderManager.LoaderC
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        //mProgressBar.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.GONE);
         mMoviesAdapter.swapCursor(cursor);
         updateEmptyView();
     }

@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
             //noinspection SimplifiableIfStatement
         }
         if (id == R.id.action_favorite) {
-            startActivity(new Intent(this, FavoriteActivity.class));
+            Intent favIntent =new Intent(this, FavoriteActivity.class);
+            startActivity(favIntent);
             return true;
         }
 
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         String sortOrder = Utility.getDefaultSortOrder(this);
+
         // update the location in our second pane using the fragment manager
         if (sortOrder != null && !sortOrder.equals(mSortOrder)) {
             AllMoviesFragment ff = (AllMoviesFragment) getSupportFragmentManager().findFragmentByTag(ALLMOVIESFRAGMENT_TAG);

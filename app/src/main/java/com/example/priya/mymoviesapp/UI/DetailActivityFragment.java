@@ -79,8 +79,14 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mTrailerList = (ExpandedListView) rootView.findViewById(R.id.trailers_listview);
 
         mDetailAdapter = new DetailAdapter(getActivity(), null, 0);
+
         mReviewAdapter = new ReviewAdapter(getActivity(), null, 1);
+        View emptyReviewView = rootView.findViewById(R.id.listview_empty_review);
+        mReviewList.setEmptyView(emptyReviewView);
+
         mTrailerAdapter = new TrailerAdapter(getActivity(), null, 2);
+        View emptyTrailerView = rootView.findViewById(R.id.listview_empty_trailer);
+        mTrailerList.setEmptyView(emptyTrailerView);
 
         mDetailLayout.setAdapter(mDetailAdapter);
         mReviewList.setAdapter(mReviewAdapter);
@@ -192,8 +198,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-      /*  mDetailAdapter.swapCursor(null);
-        mReviewAdapter.swapCursor(null);*/
         switch (loader.getId()) {
             case DETAIL_LOADER:
                 mDetailAdapter.swapCursor(null);

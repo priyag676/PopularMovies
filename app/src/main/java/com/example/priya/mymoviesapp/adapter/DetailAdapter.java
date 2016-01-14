@@ -22,7 +22,7 @@ import com.squareup.picasso.Picasso;
  */
 public class DetailAdapter extends CursorAdapter {
     String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
-    public static final String IMAGE_DEFAULT_SIZE = "w500";
+    public static final String IMAGE_DEFAULT_SIZE = "w342";
     public static final String LOG_TAG = DetailAdapter.class.getSimpleName();
     public DetailAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
@@ -79,30 +79,6 @@ public class DetailAdapter extends CursorAdapter {
         popularityTextView.setText(popularity);
         vote_countTextView.setText(vote_count);
 
-      /*  reviewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent reviewIntent = new Intent(mContext, ReviewActivity.class)
-                        .putExtra(Intent.EXTRA_TEXT, mMovie_id);
-
-                mContext.startActivity(reviewIntent);
-                Log.v(LOG_TAG, "Movie id" + mMovie_id);
-            }
-        });
-
-        trailerbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent reviewIntent = new Intent(mContext, TrailerActivity.class)
-                        .putExtra(Intent.EXTRA_TEXT, mMovie_id);
-
-                mContext.startActivity(reviewIntent);
-                Log.v(LOG_TAG, "Movie id" + mMovie_id);
-            }
-        });
-*/
 
         markFavBtn.setOnClickListener(new View.OnClickListener() {
             @Override

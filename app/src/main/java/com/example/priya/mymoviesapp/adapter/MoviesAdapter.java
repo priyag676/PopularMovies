@@ -51,7 +51,6 @@ public class MoviesAdapter extends CursorAdapter {
             Log.d(LOG_TAG + " - Image uri:", imageUri.toString());
             Picasso.with(mContext).load((imageUri)).fit().into(posterImageView);
         }
-        //Picasso.with(mContext).load((imageUri)).placeholder(R.drawable.loading).into(posterImageView);
     }
 
     @Override

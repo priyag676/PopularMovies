@@ -21,5 +21,4 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/detail_content"
         />
-
 </LinearLayout>

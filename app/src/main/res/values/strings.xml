@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">MyMoviesApp</string>
+    <string name="app_name">Popular Movies</string>
     <string name="action_settings">Settings</string>
     <string name="action_refresh" translatable="false">Refresh</string>
     <string name="action_share" translatable="false">Share</string>
     <string name="action_favorite" translatable="false">Favorite</string>
 
-    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_detail">Movies Detail</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- String values for sort order-->
@@ -23,8 +23,6 @@
     <string name="pref_sortBY_popularity" translatable="false">popularity.desc</string>
     <string name="pref_sortBy_highestRated" translatable="false">vote_average.desc</string>
 
-    <string name="title_activity_review">ReviewActivity</string>
-    <string name="title_activity_trailer">TrailerActivity</string>
     <string name="details.button.favorite.add">Mark as Favorite</string>
     <string name="details.button.favorite.remove">Unmark as Favorite</string>
     <string name="title_activity_favorite">FavoriteActivity</string>

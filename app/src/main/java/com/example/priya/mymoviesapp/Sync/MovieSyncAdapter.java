@@ -65,7 +65,7 @@ public class MovieSyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     // Interval at which to sync with the movies, in milliseconds.
-// 60 seconds (1 minute) * 180 = 3 hours
+    // 60 seconds * 60 minutes * 24 hours = 1 Day
     public static final int SYNC_INTERVAL = 60 * 60 * 24;
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL / 3;
     private static final long DAY_IN_MILLIS = 60* 60 * 24;
@@ -256,10 +256,10 @@ public class MovieSyncAdapter extends AbstractThreadedSyncAdapter {
 
             if (System.currentTimeMillis() - lastSyncTime >= DAY_IN_MILLIS) {
                 // Last sync was more than 1 day ago, let's send a notification with the weather.
-                int smallIcon = R.mipmap.ic_launcher;
+                int smallIcon = R.drawable.ic_launcher_2;
                 Bitmap largeIcon = BitmapFactory.decodeResource(
                         getContext().getResources(),
-                        R.mipmap.ic_launcher);
+                        R.drawable.ic_launcher_2);
                 String title = context.getString(R.string.app_name);
                 // Define the text of the forecast.
                 String contentText = context.getString(R.string.format_notification);

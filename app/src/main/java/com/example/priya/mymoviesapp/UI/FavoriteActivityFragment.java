@@ -44,7 +44,8 @@ public class FavoriteActivityFragment extends Fragment implements LoaderManager.
 
         favMoviesGridView = (GridView) rootView.findViewById(R.id.fav_movies_gridview);
         favMoviesAdapter = new MoviesAdapter(getActivity(), null, 0); // cursor added on load
-
+        View emptyView = rootView.findViewById(R.id.listview_empty_fav);
+        favMoviesGridView.setEmptyView(emptyView);
         favMoviesGridView.setAdapter(favMoviesAdapter);
 
         favMoviesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -52,12 +53,18 @@ public class FavoriteActivityFragment extends Fragment implements LoaderManager.
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cursor currentData = (Cursor) parent.getItemAtPosition(position);
                 if (currentData != null) {
-                    Intent detailsIntent = new Intent(getActivity(), DetailActivity.class);
+                    Intent detailIntent = new Intent(getActivity(), DetailActivity.class);
                     final int MOVIE_ID_COL = currentData.getColumnIndex(MovieContract.MoviesEntry._ID);
+                    final int mId = currentData.getColumnIndex(MovieContract.MoviesEntry.COLUMN_MOVIE_ID);
+                    String mmId = currentData.getString(mId);
+
                     Uri movieUri = MovieContract.MoviesEntry.buildMoviesWithId(currentData.getInt(MOVIE_ID_COL));
 
-                    detailsIntent.setData(movieUri);
-                    startActivity(detailsIntent);
+                    detailIntent.setData(movieUri);
+                    detailIntent.putExtra("Id",MOVIE_ID_COL);
+                    detailIntent.putExtra("movieid", mmId);
+                    //Start details activity
+                    startActivity(detailIntent);
                 }
             }
         });
